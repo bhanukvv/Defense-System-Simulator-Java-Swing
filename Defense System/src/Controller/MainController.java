@@ -1,10 +1,13 @@
-
 package Controller;
+
+
+import java.awt.*;
+
 
 
 public class MainController extends javax.swing.JFrame {
 
-   
+     
     public MainController() {
         initComponents();
     }
@@ -40,9 +43,10 @@ public class MainController extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Helicopter units", "Tank units", "Submarine units" }));
-        jComboBox1.setSelectedItem(jComboBox1);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select unit--", "Helicopter units", "Tank units", "Submarine units" }));
+        jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -90,7 +94,7 @@ public class MainController extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
-        jLabel7.setText("Send Private ");
+        jLabel7.setText("Send Private msg");
 
         jButton1.setText("Send ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +185,7 @@ public class MainController extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addGap(94, 94, 94)
                         .addComponent(jButton1)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -238,19 +242,83 @@ public class MainController extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-                // TODO add your handling code here:
+           String selected = (String) jComboBox1.getSelectedItem();
+           updateSendButtonState();
+    switch(selected) {
+
+        case "--- Select Unit ---" -> { 
+        jLabel8.setText("-");
+        jLabel9.setText("-");
+        jLabel10.setText("-");
+        jLabel11.setText("-");
+        jLabel12.setText("-");
+       
+
+         }
+
+        case "Helicopter units" -> {
+        jLabel8.setText("10");   
+        jLabel9.setText("250"); 
+        jLabel10.setText("-");  
+        jLabel11.setText("80%"); 
+        jLabel12.setText("75%"); 
+         
+            }
+
+        case "Tank units" -> {
+        jLabel8.setText("4");
+        jLabel9.setText("100");
+        jLabel10.setText("-");
+        jLabel11.setText("60%");
+        jLabel12.setText("90%");
+         
+        }
+
+        case "Submarine units" -> {
+        jLabel8.setText("12");
+        jLabel9.setText("50");
+        jLabel10.setText("95%");  
+        jLabel11.setText("85%");
+        jLabel12.setText("70%");
+         
+            }
+       
+    }
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+ boolean isOn = jToggleButton1.isSelected();
+    jToggleButton1.setText(isOn ? "Area Clear : YES" : "Area Clear : NO");
+
+    jTextArea2.append("[SYSTEM] Area Clear set to: " + (isOn ? "YES" : "NO") + "\n");        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+String msg = jTextField1.getText().trim();
+ 
+    if(msg.isEmpty()) return;
+    
+    String selected = (String) jComboBox1.getSelectedItem();
+    
+        
+    switch(selected) {
+       
+        case "Helicopter units" -> jTextArea4.append("Me: " + msg + "\n");
+
+        case "Tank units" -> jTextArea3.append("Me: " + msg + "\n");
+
+        case "Submarine units" -> jTextArea1.append("Me: " + msg + "\n");
+        
+    }
+      jTextField1.setText("");
+
+    
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
@@ -260,7 +328,12 @@ public class MainController extends javax.swing.JFrame {
                 new MainController().setVisible(true);
             }
         });
+    
+      
     }
+   
+   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -288,4 +361,18 @@ public class MainController extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+
+private void updateSendButtonState() {
+    String selected = (String) jComboBox1.getSelectedItem();
+
+    if (selected != null || !selected.equals("--- Select Unit ---")) {
+        jButton1.setEnabled(true);
+    } else {
+        jButton1.setEnabled(false);
+    }
+}
+
+  
+
 }
