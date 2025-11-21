@@ -60,7 +60,7 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" pref="71" max="-2" attributes="0"/>
@@ -68,8 +68,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSpinner1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinner2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSpinner1" max="32767" attributes="0"/>
+                              <Component id="jSpinner2" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jButton5" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
@@ -145,7 +145,7 @@
             </Property>
             <Property name="orientation" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Text Cursor"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
         </Component>
