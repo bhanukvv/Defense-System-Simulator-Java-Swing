@@ -1,14 +1,30 @@
 package Controller;
 
 
-import java.awt.*;
+import units.Helicopter.Helicopter;
+import units.tank.Tank;
+import units.Submarine.Submarine;
+
+
+
+
 
 
 
 public class MainController extends javax.swing.JFrame {
+    
+    private Tank tank;
+    private Helicopter helicopter;
+    private Submarine submarine;
+
+    public MainController() {
+        tank = new Tank();
+        helicopter = new Helicopter();
+        submarine = new Submarine();
+
 
      
-    public MainController() {
+    
         initComponents();
     }
 

@@ -1,13 +1,81 @@
+package units.Helicopter;
 
-package units.helicopter;
+import core.ObservableUnit;
+import core.Observer;
+import javax.swing.*;
 
+public class Helicopter extends JFrame implements Observer {
 
-public class Helicopter extends javax.swing.JFrame {
+    private ObservableUnit helicopterUnit;
 
     
+
     public Helicopter() {
         initComponents();
+
+        helicopterUnit = new ObservableUnit("Helicopter", 8, 40, 80, 90, 60);
+        helicopterUnit.addObserver(this);
+
+        jSlider1.setValue(helicopterUnit.getEnergyLevel());
+        jSpinner1.setValue(helicopterUnit.getSoldierCount());
+        jSpinner2.setValue(helicopterUnit.getAmmoCount());
     }
+
+    private void shoot() {
+        if(helicopterUnit.getAmmoCount() > 0){
+            helicopterUnit.setAmmoCount(helicopterUnit.getAmmoCount() - 1);
+            appendLog("[ACTION] Helicopter shoots!");
+        } else appendLog("[SYSTEM] No ammo left!");
+        updateSlider();
+    }
+
+    private void missile() {
+        if(helicopterUnit.getAmmoCount() >= 2){
+            helicopterUnit.setAmmoCount(helicopterUnit.getAmmoCount() - 2);
+            appendLog("[ACTION] Missile launched!");
+        } else appendLog("[SYSTEM] Not enough ammo for missile!");
+        updateSlider();
+    }
+
+    private void reportPosition() {
+        appendLog("[REPORT] Helicopter position: (X:" + (int)(Math.random()*100) + ", Y:" + (int)(Math.random()*100) + ")");
+    }
+
+    private void sendChat() {
+        String msg = jTextField1.getText().trim();
+        if(!msg.isEmpty()){
+            jTextArea2.append("Me: " + msg + "\n");
+            jTextField1.setText("");
+        }
+    }
+
+    private void applyCounts() {
+        helicopterUnit.setSoldierCount((Integer) jSpinner1.getValue());
+        helicopterUnit.setAmmoCount((Integer) jSpinner2.getValue());
+        updateSlider();
+    }
+
+    private void updateSlider() {
+        jSlider1.setValue(helicopterUnit.getEnergyLevel());
+    }
+
+    private void appendLog(String message) {
+        jTextArea1.append(message + "\n");
+    }
+
+    @Override
+    public void update(String message) {
+        appendLog("[UPDATE] " + message);
+        updateSlider();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Helicopter().setVisible(true));
+    }
+
+   
+
+
 
     
     @SuppressWarnings("unchecked")
@@ -224,14 +292,7 @@ public class Helicopter extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Helicopter().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
