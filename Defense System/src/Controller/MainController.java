@@ -243,7 +243,7 @@ public class MainController extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
            String selected = (String) jComboBox1.getSelectedItem();
-           updateSendButtonState();
+          
     switch(selected) {
 
         case "--- Select Unit ---" -> { 
@@ -363,15 +363,7 @@ String msg = jTextField1.getText().trim();
     // End of variables declaration//GEN-END:variables
 
 
-private void updateSendButtonState() {
-    String selected = (String) jComboBox1.getSelectedItem();
 
-    if (selected != null || !selected.equals("--- Select Unit ---")) {
-        jButton1.setEnabled(true);
-    } else {
-        jButton1.setEnabled(false);
-    }
-}
 
   
 
