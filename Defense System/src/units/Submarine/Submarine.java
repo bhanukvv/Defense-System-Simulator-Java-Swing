@@ -9,6 +9,9 @@ public class Submarine extends JFrame implements Observer {
 
     public Submarine() {
         initComponents();
+        
+        jTextArea2.setEditable(false); // Group Activity Log
+        jTextArea1.setEditable(false); // Submarine chat
 
         submarineUnit = new ObservableUnit("Submarine", 12, 50, 85, 95, 70);
         submarineUnit.addObserver(this);
@@ -66,6 +69,14 @@ public class Submarine extends JFrame implements Observer {
         appendLog("[UPDATE] " + message);
         updateSliders();
     }
+    
+    private void sendChat() {
+    String msg = jTextField1.getText().trim();
+    if (!msg.isEmpty()) {
+        jTextArea1.append("Me: " + msg + "\n");
+        jTextField1.setText("");
+        }
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Submarine().setVisible(true));
@@ -114,12 +125,27 @@ public class Submarine extends JFrame implements Observer {
 
         jButton1.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jButton1.setText("Shoot");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jButton2.setText("Torpedo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jButton3.setText("Sonar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jButton4.setText("Report Position");
@@ -160,6 +186,11 @@ public class Submarine extends JFrame implements Observer {
 
         jButton6.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jButton6.setText("Send");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,8 +291,24 @@ public class Submarine extends JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+      reportPosition();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        shoot();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         torpedo();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         sonar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+            sendChat();
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     
     
